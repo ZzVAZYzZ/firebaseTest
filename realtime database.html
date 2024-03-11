@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <input type="name" placeholder="Username" id="username">
+      <input type="text" placeholder="Age" id="age">
+    </form>
+    <button id="saveButton">save</button>
+    <button id="getButton">get data</button>
+
+
+
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDQflxrGezAuEO4NxO2EmhzhZjZjMYgHu4",
+        authDomain: "my-project-eb44b.firebaseapp.com",
+        databaseURL: "https://my-project-eb44b-default-rtdb.firebaseio.com",
+        projectId: "my-project-eb44b",
+        storageBucket: "my-project-eb44b.appspot.com",
+        messagingSenderId: "738847674304",
+        appId: "1:738847674304:web:7c1d180ca1d12404ff8225"
+      };
+
+      const app = initializeApp(firebaseConfig);
+
+
+
+      import{getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+      let database = getDatabase();
+      
+      
+      var saveButton = document.getElementById('saveButton');
+      saveButton.onclick = save;
+
+
+      function save(){
+        let username = document.getElementById('username');
+        let age = document.getElementById('age');
+        set(ref(database,'users/'+username.value),{
+          name: username.value,
+          age: age.value
+        })
+        .then(()=>{
+          alert("succes");
+        })
+        .catch((e)=>{
+          alert("failed");
+          console.log(e);
+        })
+      }
+
+
+
+    </script>
+  </body>
+</html>
